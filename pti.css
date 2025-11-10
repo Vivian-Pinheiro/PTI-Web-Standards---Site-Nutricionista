@@ -1,0 +1,514 @@
+/* --- ESTILOS GERAIS/RESET (Importante para Flexbox) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho total do elemento */
+    font-family: Arial, sans-serif;
+}
+
+:root {
+    /* Defina cores principais para facilitar a manutenção */
+    --cor-principal: #4CAF50; /* Verde Saúde */
+    --cor-secundaria: #388E3C; /* Verde Escuro */
+    --cor-fundo: #F5F5F5;
+}
+
+/* --- SEÇÃO HERO: Desktop (Layout Lado a Lado) --- */
+.hero {
+    background-color: var(--cor-fundo);
+    min-height: 80vh; /* Ocupa 80% da altura da tela */
+    padding: 40px 20px;
+    
+    /* Configuração Flexbox */
+    display: flex;
+    align-items: center; /* Alinha o conteúdo verticalmente no centro */
+    justify-content: space-around; /* Distribui o espaço */
+    gap: 30px; /* Espaço entre o texto e a imagem */
+}
+
+/* Conteúdo de Texto */
+.hero-content {
+    max-width: 500px;
+}
+
+.hero-content h1 {
+    font-size: 2.5em;
+    color: var(--cor-secundaria);
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+/* Imagem */
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Borda suave para a imagem */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão CTA */
+.btn-cta-primary {
+    display: inline-block;
+    background-color: var(--cor-principal);
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-cta-primary:hover {
+    background-color: var(--cor-secundaria);
+}
+
+/* --- RESPONSIVIDADE: Mobile (Layout Empilhado) --- */
+/* Media Query para telas menores que 768px (smartphones) */
+@media (max-width: 768px) {
+    .hero {
+        /* A chave da responsividade:
+           Altera o fluxo principal para coluna, empilhando os itens */
+        flex-direction: column; 
+        text-align: center; /* Centraliza o texto */
+        padding-top: 60px;
+    }
+
+    .hero-content, .hero-image {
+        /* No celular, os itens ocupam a largura total disponível */
+        height: auto; 
+        max-width: 100%;
+    }
+    
+    .hero-image {
+        /* A imagem fica no topo ou logo após o texto, dependendo do order
+           (por padrão, como a imagem está no final do HTML, ela fica embaixo) */
+        margin-top: 30px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8em;
+    }
+}
+
+/* --- SEÇÃO SOBRE (Layout Flexbox Padrão) --- */
+.sobre {
+    padding: 60px 20px;
+    background-color: white;
+    
+    /* Configuração Flexbox */
+    display: flex;
+    align-items: flex-start; /* Alinha o conteúdo no topo */
+    justify-content: center;
+    gap: 40px; /* Espaço entre o conteúdo principal e o destaque */
+}
+
+.sobre h2 {
+    font-size: 2em;
+    color: var(--cor-principal);
+    margin-bottom: 25px;
+}
+
+.sobre p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* O Conteúdo principal ocupa um espaço maior */
+.sobre-content {
+    flex: 2; /* Ocupa o dobro do espaço do lado (2 partes) */
+    max-width: 600px;
+}
+
+/* O Bloco de Destaque ocupa um espaço menor */
+.sobre-destaque {
+    flex: 1; /* Ocupa uma parte do espaço (1 parte) */
+    min-width: 250px;
+    padding-top: 50px; /* Ajuste para alinhar com o texto ao lado */
+}
+
+.citacao {
+    border-left: 5px solid var(--cor-principal);
+    padding-left: 20px;
+    font-style: italic;
+    font-size: 1.2em;
+    color: #555;
+    background-color: var(--cor-fundo); /* Fundo claro para o bloco de destaque */
+    padding: 20px;
+}
+
+
+/* --- RESPONSIVIDADE: Mobile --- */
+@media (max-width: 768px) {
+    .sobre {
+        /* Empilhamento: Transforma o layout lado a lado em coluna */
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    /* Garantindo que os blocos usem a largura total no celular */
+    .sobre-content, .sobre-destaque {
+        flex: 1; /* Reseta o flex para 1 no mobile */
+        width: 100%;
+        max-width: 100%;
+        min-width: unset;
+    }
+
+    .citacao {
+        /* Remove o padding-left extra no mobile para centralizar */
+        border-left: none;
+        padding-left: 0;
+        margin-top: 30px;
+    }
+    
+    /* Para o texto do bloco destaque, se quisermos centralizar: */
+    .sobre-destaque {
+        padding-top: 0; /* Remove o ajuste de padding do desktop */
+    }
+}
+
+/* --- SEÇÃO SERVIÇOS --- */
+.servicos {
+    background-color: var(--cor-fundo);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.servicos h3 {
+    font-size: 2.2em;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+/* CONTAINER FLEXBOX PRINCIPAL */
+.servicos-container {
+    display: flex;
+    /* flex-wrap: wrap; -> Permite que os cards quebrem a linha */
+    flex-wrap: wrap; 
+    /* justify-content: center; -> Centraliza os cards na linha */
+    justify-content: center;
+    gap: 30px; /* Espaço entre os cards */
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza o container na página */
+}
+
+/* ESTILO DOS CARDS INDIVIDUAIS */
+.card-servico {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s;
+    
+    /* A CHAVE DA RESPONSIVIDADE COM FLEXBOX:
+       flex-grow: 1 (Pode crescer)
+       flex-shrink: 1 (Pode diminuir)
+       flex-basis: 300px (Tamanho ideal de 300px) 
+       Se a largura do container permitir 3 cards de 300px + gap, eles ficam lado a lado.
+       Se não houver espaço, eles quebram automaticamente para a linha de baixo.
+    */
+    flex: 1 1 300px; 
+}
+
+.card-servico:hover {
+    transform: translateY(-5px);
+}
+
+.card-servico.destaque {
+    border: 3px solid var(--cor-principal);
+    transform: scale(1.03); /* Dá um pequeno destaque visual */
+}
+
+.card-servico h4 {
+    color: var(--cor-secundaria);
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.card-servico ul {
+    list-style: none;
+    text-align: left;
+    margin: 20px 0;
+}
+
+.card-servico ul li {
+    padding: 5px 0;
+    border-bottom: 1px dashed #eee;
+    color: #555;
+}
+
+/* Estilo para o botão secundário nos cards */
+.btn-secundario {
+    display: block; /* Ocupa a largura total do card */
+    margin-top: 20px;
+    padding: 10px;
+    background-color: transparent;
+    border: 2px solid var(--cor-principal);
+    color: var(--cor-principal);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-secundario:hover {
+    background-color: var(--cor-principal);
+    color: white;
+}
+
+/* --- RESPONSIVIDADE: O Flexbox já faz o trabalho! --- */
+/* Não precisamos de uma Media Query específica para o empilhamento.
+   O 'flex: 1 1 300px;' garante que, quando a tela for pequena,
+   apenas um card (ou dois) caberá na linha, e o restante será quebrado. */
+
+@media (max-width: 650px) {
+    /* Ajuste para garantir que em telas muito pequenas (vertical) o card ocupe quase tudo */
+    .card-servico {
+        flex: 1 1 90%; /* Força ele a ocupar a maior parte da largura para evitar cards muito estreitos */
+    }
+}
+
+/* --- SEÇÃO VANTAGENS --- */
+.vantagens {
+    padding: 60px 20px;
+    background-color: white; /* Contraste com a seção anterior */
+}
+
+/* CONTAINER FLEXBOX PRINCIPAL DA SEÇÃO */
+.vantagens-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px; /* Espaço entre as duas colunas */
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ESTILO DOS TÍTULOS */
+.vantagens h3 {
+    font-size: 1.8em;
+    color: var(--cor-secundaria);
+    margin-bottom: 25px;
+}
+
+/* LISTA DE BENEFÍCIOS (COLUNA 1) */
+.beneficios-lista {
+    flex: 1; /* Permite que ocupe o espaço disponível */
+    min-width: 300px; /* Garante que não fique muito estreito no desktop */
+}
+
+.lista-check {
+    list-style: none;
+}
+
+.lista-check li {
+    font-size: 1.1em;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--cor-fundo);
+    display: flex;
+    align-items: center;
+}
+
+/* Ícone de checkmark personalizado */
+.lista-check li span {
+    color: var(--cor-principal);
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+
+
+/* PROVA SOCIAL (COLUNA 2) */
+.prova-social {
+    flex: 1; /* Permite que ocupe o espaço disponível */
+    min-width: 300px;
+}
+
+.depoimento {
+    background-color: var(--cor-fundo);
+    border-left: 4px solid var(--cor-principal);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.depoimento p {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.depoimento cite {
+    display: block;
+    text-align: right;
+    font-size: 0.9em;
+    color: var(--cor-secundaria);
+}
+
+
+/* --- RESPONSIVIDADE: Mobile --- */
+@media (max-width: 768px) {
+    .vantagens-container {
+        /* A chave da responsividade: Empilha as duas colunas */
+        flex-direction: column;
+        text-align: left; /* Mantém o alinhamento da lista */
+    }
+
+    /* Garantir que as colunas ocupem a largura total */
+    .beneficios-lista, .prova-social {
+        width: 100%;
+        min-width: unset;
+    }
+    
+    .prova-social {
+        margin-top: 30px; /* Adiciona um espaço extra entre as seções empilhadas */
+    }
+}
+
+/* --- SEÇÃO CONTATO --- */
+.contato {
+    background-color: var(--cor-principal); /* Cor de destaque para o CTA */
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.contato-wrapper {
+    max-width: 700px;
+    margin: 0 auto; /* Centraliza o bloco na página */
+}
+
+.contato h2 {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+}
+
+.subtitulo-contato {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+/* ESTILOS DO FORMULÁRIO */
+.formulario {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    color: #333;
+    
+    /* Usando Flexbox para organizar os campos de forma fluida */
+    display: flex;
+    flex-direction: column; /* Empilha os campos verticalmente */
+    gap: 15px; /* Espaço entre cada campo */
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.campo input, .campo textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.campo input:focus, .campo textarea:focus {
+    border-color: var(--cor-principal);
+    outline: none; /* Remove a borda de foco padrão do navegador */
+}
+
+/* O botão já usa o estilo .btn-cta-primary definido na Seção Hero.
+   Aqui garantimos que ele tenha a largura completa do formulário. */
+.formulario .btn-cta-primary {
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* --- RODAPÉ (FOOTER) --- */
+footer {
+    background-color: #333; /* Cor escura para contraste */
+    color: #f0f0f0;
+    padding: 40px 20px;
+    font-size: 0.9em;
+}
+
+/* CONTAINER FLEXBOX PRINCIPAL */
+.footer-container {
+    display: flex;
+    justify-content: space-between; /* Espaço entre os blocos */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-bloco h4 {
+    color: var(--cor-principal);
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.footer-bloco p, .footer-bloco a {
+    margin-bottom: 8px;
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer-bloco a:hover {
+    color: var(--cor-principal);
+    text-decoration: underline;
+}
+
+/* BLOCAGEM FLEXBOX */
+.footer-bloco {
+    /* Define uma base de largura para que os blocos sejam flexíveis */
+    flex: 1 1 250px; 
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.link-pequeno a {
+    font-size: 0.8em;
+    margin-top: 10px;
+    display: block;
+}
+
+
+/* --- RESPONSIVIDADE: Mobile --- */
+@media (max-width: 768px) {
+    .footer-container {
+        /* A chave da responsividade: Empilha os blocos verticalmente */
+        flex-direction: column;
+        text-align: center; /* Centraliza o texto no celular */
+    }
+
+    .footer-bloco {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .footer-bloco.marca p {
+        /* Espaçamento extra após o primeiro bloco */
+        margin-bottom: 15px;
+    }
+
+    .social-links {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .social-links a {
+        margin: 0 10px;
+    }
+}
